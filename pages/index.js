@@ -1,3 +1,5 @@
+'use client';
+
 import Spline from '@splinetool/react-spline';
 import Layout from '../components/layout';
 import About from '../components/about';
