@@ -1,0 +1,15 @@
+/* สร้างการอนิเมชั่นการวิ่ง */
+@keyframes runAnimation {
+    0% {
+      transform: translateX(-100%); 
+    }
+    100% {
+      transform: translateX(100vw); 
+    }
+  }
+  
+  /* เพิ่มอนิเมชั่นให้ตัวละคร */
+  .animate-run {
+    animation: runAnimation 30s linear infinite; 
+  }
+  

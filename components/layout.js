@@ -1,78 +1,50 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Script from 'next/script';
+import { useEffect } from 'react';
 
-import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
-import Link from 'next/link';
+const Layout = () => {
+  useEffect(() => {
+    const aboutLink = document.getElementById('aboutLink');
+    const homeLink = document.getElementById('homeLink');
+    const projectLink = document.getElementById('projectLink');
 
-const name = '[Your Name]';
-export const siteTitle = 'Next.js Sample Website';
+    aboutLink.addEventListener('click', (event) => {
+      event.preventDefault(); 
+      const aboutSection = document.getElementById('about'); 
+      aboutSection.scrollIntoView({ behavior: 'smooth' }); 
+    });
 
-export default function Layout({ children, home }) {
+    homeLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      const homeSection = document.getElementById('spline'); 
+      homeSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    projectLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      const projectSection = document.getElementById('project'); 
+      projectSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  }, []);
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle,
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
-      <Script
-        src="https://connect.facebook.net/en_US/sdk.js"
-        strategy="lazyOnload"
-        onLoad={() =>
-          console.log(`script loaded correctly, window.FB has been populated`)
-        }
-      />
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/profile.jpg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt={name}
-              />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">← Back to home</Link>
+    <div className="sticky top-0 z-50 bg-black shadow-lg">
+      <div className="flex px-8 py-3 justify-between">
+        <div className="flex justify-center items-center"></div>
+        <div className="flex px-2 pl-6 space-x-6 flex justify-center py-2">
+          <div className="flex justify-between items-center cursor-pointer">
+            <div id="homeLink" className="text-white text-xl font-bold hover:text-yellow-500 hover:scale-105 transition-all duration-300">
+              HOME
+            </div>
+          </div>
+          <div id="aboutLink" className="text-white text-xl font-bold hover:text-yellow-500 hover:scale-105 transition-all duration-300">
+            ABOUT
+          </div>
+          <div id="projectLink" className="text-white text-xl font-bold hover:text-yellow-500 hover:scale-105 transition-all duration-300">
+            PROJECT
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
-}
+};
+
+export default Layout;
